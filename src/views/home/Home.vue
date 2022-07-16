@@ -1,25 +1,34 @@
 <template>
-    <div id="home">
+        <div id="home">
         <Navbar class="home-nav">
-            <template v-slot:title>购物车</template>
+        <template v-slot:title>购物车</template>
         </Navbar>
-       <HomeSwiper :banners="banners"/>
-        <RecommendView :recommends="recommends"/>
-        <featureView/>
-        <TabControl class="tab-control" :titles="['流行','新款','精选']" 
-        @tabclick="tabclick"/>
-        <Goodslist :goods="goodslist"/>
-    </div>
+        <Scroll class="content" ref="scroll" 
+                :probeType="2"
+                :pullUpLoad="true" 
+                @scroll="contentScroll">
+            <HomeSwiper :banners="banners"/>
+            <RecommendView :recommends="recommends"/>
+            <featureView/>
+            <TabControl class="tab-control" :titles="['流行','新款','精选']" 
+            @tabclick="tabclick"/>
+            <Goodslist :goods="goodslist"/>
+        </Scroll>
+        <BackTop @click="BackClick" v-show="isshow"/>
+       </div>
+    
 </template>
 
 <script>
     import Navbar from '@/components/common/navbar/Navbar.vue'
+    import Scroll from '@/components/common/bscroll/Scroll.vue'
    
     import HomeSwiper from './childComps/HomeSwiper.vue'
     import RecommendView from './childComps/RecommendView.vue'
     import featureView from './childComps/featureView.vue'
     import TabControl from '@/components/content/tabcontrol/TabControl.vue'
     import Goodslist from '@/components/content/goods/Goodslist.vue'
+    import BackTop from '@/components/content/backTop/BackTop.vue'
 
     import {getHomeMultidata,getHomeGoods} from '@/network/home.js'
     export default {
@@ -92,7 +101,8 @@
                         ,title:'复古文艺亚麻两件套女装2022夏季新款宽松显瘦文艺休闲开衫套装潮'}
                     ]},
                 },
-                currentType:'pop'
+                currentType:'pop',
+                isshow:false
             }
         },
         components:{
@@ -101,7 +111,9 @@
          RecommendView,
          featureView,
          TabControl,
-         Goodslist
+         Goodslist,
+         Scroll,
+         BackTop
         },
          created(){
             this.getHomeMultidata();
@@ -115,14 +127,19 @@
                 case 0 : this.currentType="pop";break;
                 case 1 : this.currentType="new";break;
                 case 2 : this.currentType="sell";break;
-
                }
+            },
+            BackClick(){
+               this.$refs.scroll.scroll.scrollTo(0,0,300)
+            },
+            contentScroll(position){
+                this.isshow=(-position.y) > 1000
             },
 
             // 网络请求方法
             getHomeMultidata(){
                  getHomeMultidata().then(res=>{
-                this.banners=res.data.data.banner.list;
+                 this.banners=res.data.data.banner.list;
                  this.recommends=res.data.data.recommend.list;
                  }) 
             },
@@ -147,7 +164,8 @@
 
 <style scoped>
 #home{
-    padding-top:44px ;
+    height: 100vh;
+    
 }
 .home-nav {
     background: pink;
@@ -160,5 +178,15 @@
     z-index: 1;
     width: 100%;
 }
-
+.tab-control{
+    position: sticky;
+    top: 44px;
+    z-index: 1;
+}
+.content{
+    overflow: hidden;
+    position: absolute;
+    top: 44px;
+    bottom: 49px;
+}
 </style>

@@ -24,12 +24,12 @@
 
 <style scoped>
 .goods-list-item{
-    padding-bottom: 10px;
+    padding-bottom: 45px;
     width: 48%;
 }
 .goods-list-item img{
-    height: 200px;
-    width: 175px;
+    height: 100%;
+    width: 100%;
     border-radius: 5px;
 }
 .goods-info{

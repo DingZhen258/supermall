@@ -6,7 +6,6 @@
          @click="clickitem(index)">
              <span>{{item}}</span>
         </div>
-       
     </div>
 </template>
 
@@ -38,10 +37,8 @@
 #tab-control{
     display:flex;
     background: white;
-    position: sticky;
-    top: 44px;
     padding-bottom: 5px;
-    z-index: 1;
+   
 }
 .tab-control-item{
     flex:1;

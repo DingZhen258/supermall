@@ -27,3 +27,14 @@ export function request(config) {
     // 发送真正请求 axios本身返回的就是一个promise
     return instance(config)
 }
+
+
+export function request2(config) {
+    //     // 创建axios实例
+    const instance = axios.create({
+        baseURL: 'hhttps: //www.fastmock.site/mock/da500a5dbc35c02bc8cfbdedfd5aaca6',
+        timeout: 5000
+    })
+
+    return instance(config)
+}
