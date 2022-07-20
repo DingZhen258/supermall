@@ -1,12 +1,10 @@
 <template>
-    <div class="goods-list-item">
-      <a href="https://uland.taobao.com/sem/tbsearch?refpid=mm_26632360_8858797_29866178&keyword=%E5%A5%B3%E8%A3%85&clk1=c496a42a77bb1d93e16463d4abf662df&upsId=c496a42a77bb1d93e16463d4abf662df">
+    <div class="goods-list-item" @click="itemclick">
          <img :src="goodsitem.img" alt="">
         <div class="goods-info">
             <p>{{goodsitem.title}}</p>
             <span class="price">998￥</span>
         </div>
-      </a>
     </div>
 </template>
 
@@ -18,7 +16,14 @@
                     return {}
                 }
             }
+        },
+        methods:{
+            itemclick(){
+                this.$router.push('/detail/'+ this.goodsitem.id)
+                console.log(this.goodsitem);
+            }
         }
+
     }
 </script>
 

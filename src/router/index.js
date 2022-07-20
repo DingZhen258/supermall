@@ -10,7 +10,8 @@ const Shopcart = () =>
     import ('../views/shopcart/Shopcart.vue')
 const Profile = () =>
     import ('../views/profile/Profile.vue')
-
+const Detail = () =>
+    import ('../views/detail/Detail.vue')
 const routes = [{
         path: '',
         redirect: '/home'
@@ -33,6 +34,11 @@ const routes = [{
         path: '/profile',
         name: 'profile',
         component: Profile,
+    },
+    {
+        path: '/detail/:id',
+        name: 'detail',
+        component: Detail,
     }
 
 ]

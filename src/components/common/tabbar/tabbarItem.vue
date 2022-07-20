@@ -28,7 +28,7 @@
         computed:{
             IsAcitve(){
                 // 当前传入的路径this.$route.path 如果等于当前path 则返回true
-                return this.$route.path==this.path
+                return this.$route.path.indexOf(this.path)!==-1
             },
             activeStyle()
             {

@@ -13,7 +13,7 @@
 </script>
 
 <style scoped>
-     .nav-bar {
+    .nav-bar {
     display: flex;
     height: 44px;
     line-height: 44px;
@@ -28,6 +28,8 @@
   }
 
   .center {
+    display: flex;
     flex: 1;
+    justify-content: space-around;
   }
 </style>
